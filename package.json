@@ -1,6 +1,6 @@
 {
   "name": "ha-transformers-allspark-ui",
-  "version": "0.4.2",
+  "version": "0.4.4",
   "type": "module",
   "description": "A HACS-ready Home Assistant integration that combines Transformers themes, cards, fonts, and brand assets.",
   "main": "custom_components/transformers_allspark_ui/www/transformers-cards.js",
@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/loryanstrant/ha-transformers-allspark-ui"
+    "url": "https://github.com/loryanstrant/HA-Transformers-Allspark-UI"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",

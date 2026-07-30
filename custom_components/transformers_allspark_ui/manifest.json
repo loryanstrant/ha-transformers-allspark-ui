@@ -4,10 +4,10 @@
   "codeowners": ["@loryanstrant"],
   "config_flow": true,
   "dependencies": ["frontend", "http"],
-  "documentation": "https://github.com/loryanstrant/ha-transformers-allspark-ui",
+  "documentation": "https://github.com/loryanstrant/HA-Transformers-Allspark-UI",
   "integration_type": "service",
   "iot_class": "calculated",
-  "issue_tracker": "https://github.com/loryanstrant/ha-transformers-allspark-ui/issues",
+  "issue_tracker": "https://github.com/loryanstrant/HA-Transformers-Allspark-UI/issues",
   "single_config_entry": true,
-  "version": "0.4.3"
+  "version": "0.4.4"
 }
