@@ -40,7 +40,7 @@ This supercedes both of them.
 ## Requirements
 
 - Home Assistant `2026.3.0` or newer
-- [card-mod custom component](https://github.com/thomasloven/lovelace-card-mod)
+- [card-mod custom component](https://github.com/thomasloven/lovelace-card-mod) — **optional**, and only useful on HA older than `2026.8`. See [Themes and card-mod](#themes-and-card-mod).
 - Themes enabled in your Home Assistant configuration:
 
 `frontend: themes: !include_dir_merge_named themes`
@@ -96,6 +96,66 @@ The **light card** additionally has an expandable **Controls** section with **br
 
 More theme examples can be found in on the [theme examples](THEME-EXAMPLES.md) page.
 <br><br>
+
+### Themes and card-mod
+
+**card-mod is no longer required.** From `0.5.0` the themes drive Home Assistant's own design
+tokens (`ha-font-family-body`, `ha-font-family-heading`, `ha-font-family-longform`,
+`ha-card-header-font-family`, `ha-card-border-width`, `ha-card-box-shadow`,
+`lovelace-background`), so the Transformers fonts and card styling reach every standard HA card
+with nothing else installed.
+
+Tokens alone get you card headers and card chrome. **Body text** needs one extra nudge, because
+Home Assistant sets `body { font-family: Roboto, Noto, sans-serif }` in `index.html` and every
+element inside a dashboard just inherits it — nothing in the card tree reads
+`--ha-font-family-body`. So the integration also ships `transformers-theme-shim.js`, registered
+automatically as a dashboard resource. It adopts exactly one rule into the dashboard's shadow
+root:
+
+```css
+hui-view-container { font-family: var(--ha-font-family-body); }
+```
+
+Home Assistant already applies theme variables to `hui-view-container`, so a themed view picks up
+its font and everything below inherits it. A view with **no** Transformers theme resolves that
+variable to Home Assistant's own default, so the rule changes nothing there — the scoping is free.
+Unlike card-mod, the shim touches no Home Assistant panel, route or internal module, so it cannot
+break the way card-mod did.
+
+This matters because **card-mod is broken on HA 2026.8**: HA renamed the Developer Tools panel
+from `developer-tools` to `tools`, and card-mod borrows that panel's YAML parser to read theme
+YAML. It can no longer find it, so it silently stops applying theme styles
+([card-mod#606](https://github.com/thomasloven/lovelace-card-mod/issues/606)). If your
+Transformers fonts disappeared after updating to 2026.8, that is why — update to `0.5.0`.
+
+The `card-mod-*` blocks are still in the theme file for anyone on HA older than `2026.8`, where
+card-mod works and adds four purely decorative extras that tokens cannot express:
+
+- uppercase card headers (`text-transform`)
+- header letter-spacing and glow (`letter-spacing`, `text-shadow`)
+- the card background gradient
+- the `TELETRAAN-I` inset red view frame
+
+Running both paths together is safe — they describe the same design. If you are on `2026.8` or
+newer you can uninstall card-mod entirely; you lose only those four flourishes.
+
+#### Scoping the font to one view
+
+Assign the theme to a **single view** and the font stays in that view only:
+
+```yaml
+views:
+  - title: Cybertron
+    theme: Transformers Dark (G1)
+    cards: ...
+```
+
+Home Assistant applies theme variables to the view's container element, and CSS custom
+properties inherit into every card — including their shadow DOM. Set the theme in your user
+profile instead and the whole UI is skinned.
+
+`ha-font-family-longform` styles long-form text such as markdown cards. If that reads poorly at
+body size, remove that one key from the theme and headings will still be Transformers.
 
 ## Included cards
 

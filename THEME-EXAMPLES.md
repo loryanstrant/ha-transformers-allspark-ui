@@ -2,6 +2,42 @@
 
 All themes come in both G1 and movie variants, but the cards allow for individual overrides.
 
+### Applying a theme (and where the font lands)
+
+Since `0.5.0` the themes use Home Assistant's native design tokens, so **card-mod is not
+required** — see [Themes and card-mod](README.md#themes-and-card-mod).
+
+**One view only** — the font applies to every card in that view and nothing else:
+
+```yaml
+views:
+  - title: Cybertron
+    theme: Transformers Dark (G1)
+    cards: ...
+```
+
+**Whole UI** — Profile → *Theme* → pick a Transformers theme. Sidebar, dialogs and settings are
+skinned too.
+
+The tokens each theme sets:
+
+| Token | Effect |
+|---|---|
+| `ha-font-family-body` | body text in every card |
+| `ha-font-family-heading` | headings |
+| `ha-font-family-longform` | long-form text (markdown cards) |
+| `ha-card-header-font-family` | `ha-card` headers |
+| `ha-card-border-width` / `ha-card-border-color` | 2px themed card border |
+| `ha-card-box-shadow` | outer glow plus the 4px accent stripe down the left edge |
+| `lovelace-background` | view backdrop (`TELETRAAN-I` image, Dirty Metal grime texture) |
+
+Body text inside cards is handled by the bundled `transformers-theme-shim.js` resource, which the
+integration registers for you — Home Assistant's own tokens do not reach inherited text. See
+[Themes and card-mod](README.md#themes-and-card-mod).
+
+Drop `ha-font-family-longform` from a theme if display-font markdown is hard to read; headings
+stay Transformers.
+
 
 ### 🌑 Transformers Dark
 The default dark theme with Autobot-inspired blue accents and Decepticon red highlights. Perfect for nighttime viewing with a sleek, futuristic metallic interface.
