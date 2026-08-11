@@ -3,30 +3,43 @@ import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 
-export default {
-  input: 'src/transformers-cards.js',
-  output: {
-    file: 'custom_components/transformers_allspark_ui/www/transformers-cards.js',
-    format: 'es',
-    sourcemap: true,
-  },
-  plugins: [
-    resolve(),
-    commonjs(),
-    babel({
-      babelHelpers: 'bundled',
-      exclude: 'node_modules/**',
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            targets: {
-              browsers: ['last 2 versions', 'not dead'],
-            },
+const plugins = [
+  resolve(),
+  commonjs(),
+  babel({
+    babelHelpers: 'bundled',
+    exclude: 'node_modules/**',
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            browsers: ['last 2 versions', 'not dead'],
           },
-        ],
+        },
       ],
-    }),
-    terser(),
-  ],
-};
+    ],
+  }),
+  terser(),
+];
+
+export default [
+  {
+    input: 'src/transformers-cards.js',
+    output: {
+      file: 'custom_components/transformers_allspark_ui/www/transformers-cards.js',
+      format: 'es',
+      sourcemap: true,
+    },
+    plugins,
+  },
+  {
+    input: 'src/theme-shim.js',
+    output: {
+      file: 'custom_components/transformers_allspark_ui/www/transformers-theme-shim.js',
+      format: 'es',
+      sourcemap: true,
+    },
+    plugins,
+  },
+];

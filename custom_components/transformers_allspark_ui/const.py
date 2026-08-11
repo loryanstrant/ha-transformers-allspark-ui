@@ -17,6 +17,7 @@ STATIC_URL_BASE: Final = "/transformers_allspark_ui_static"
 
 CARD_BUNDLE_FILENAME: Final = "transformers-cards.js"
 FONT_STYLESHEET_FILENAME: Final = "transformers-fonts.css"
+THEME_SHIM_FILENAME: Final = "transformers-theme-shim.js"
 THEME_SOURCE_FILENAME: Final = "transformers-themes.yaml"
 THEME_INSTALL_FILENAME: Final = "transformers-allspark-ui.yaml"
 BACKGROUND_FILENAME: Final = "transformers-background.png"
@@ -35,6 +36,14 @@ RESOURCE_DEFINITIONS: Final = (
     {
         "filename": FONT_STYLESHEET_FILENAME,
         "resource_type": RESOURCE_TYPE_STYLESHEET,
+        "register": True,
+    },
+    # Makes body text inside cards follow the theme font. Home Assistant's own
+    # `body { font-family: Roboto }` is inherited all the way down and nothing in
+    # the card tree reads --ha-font-family-body, so a theme alone cannot reach it.
+    {
+        "filename": THEME_SHIM_FILENAME,
+        "resource_type": RESOURCE_TYPE_MODULE,
         "register": True,
     },
 )

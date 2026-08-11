@@ -1,6 +1,17 @@
 ################################################################################
 # Transformers Allspark UI themes
-# Requires card-mod for the deep typography and card styling overrides.
+#
+# Fonts and card chrome are driven by Home Assistant's own design tokens
+# (ha-font-family-*, ha-card-*, lovelace-background), so card-mod is NOT
+# required on HA 2026.8+. card-mod is broken on 2026.8 -- HA renamed the
+# developer-tools panel to tools, which card-mod depends on to parse theme
+# YAML (thomasloven/lovelace-card-mod#606).
+#
+# The card-mod-* blocks below are kept for HA < 2026.8, where card-mod still
+# works and adds the extras tokens cannot express: uppercase card headers,
+# header letter-spacing and glow, the card background gradient, and the
+# TELETRAAN-I inset view frame. Both paths describe the same design, so
+# running them together is safe.
 ################################################################################
 
 Transformers Dark (G1):
@@ -32,6 +43,13 @@ Transformers Dark (G1):
   ha-card-border-color: '#1e3a5f'
   transformers-card-font-family: "'Transformers G1', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--primary-color), 0 4px 12px rgba(0, 0, 0, 0.28), 0 0 18px rgba(33, 150, 243, 0.15)'
   card-mod-theme: 'Transformers Dark (G1)'
   card-mod-view-yaml: |
     .: |
@@ -97,6 +115,14 @@ Transformers (G1 - TELETRAAN-I):
   ha-card-border-color: '#1e3a5f'
   transformers-card-font-family: "'Transformers G1', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--primary-color), 0 4px 12px rgba(0, 0, 0, 0.28), 0 0 18px rgba(33, 150, 243, 0.15)'
+  lovelace-background: "center / 100% 100% no-repeat fixed url('/transformers_allspark_ui_static/backgrounds/transformers-background.png')"
   card-mod-theme: 'Transformers (G1 - TELETRAAN-I)'
   card-mod-view-yaml: |
     .: |
@@ -169,6 +195,13 @@ Transformers Dark (Movie):
   ha-card-border-color: '#1e3a5f'
   transformers-card-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--primary-color), 0 4px 12px rgba(0, 0, 0, 0.28), 0 0 18px rgba(33, 150, 243, 0.15)'
   card-mod-theme: 'Transformers Dark (Movie)'
   card-mod-view-yaml: |
     .: |
@@ -231,6 +264,13 @@ Transformers Light (G1):
   ha-card-border-color: '#bbdefb'
   transformers-card-font-family: "'Transformers G1', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--primary-color), 0 4px 12px rgba(25, 118, 210, 0.12), 0 2px 4px rgba(0, 0, 0, 0.04)'
   card-mod-theme: 'Transformers Light (G1)'
   card-mod-view-yaml: |
     .: |
@@ -293,6 +333,13 @@ Transformers Light (Movie):
   ha-card-border-color: '#bbdefb'
   transformers-card-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--primary-color), 0 4px 12px rgba(25, 118, 210, 0.12), 0 2px 4px rgba(0, 0, 0, 0.04)'
   card-mod-theme: 'Transformers Light (Movie)'
   card-mod-view-yaml: |
     .: |
@@ -355,6 +402,13 @@ Transformers Silver (G1):
   ha-card-border-color: '#606060'
   transformers-card-font-family: "'Transformers G1', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--accent-color), 0 4px 12px rgba(0, 0, 0, 0.38), 0 0 18px rgba(192, 192, 192, 0.15)'
   card-mod-theme: 'Transformers Silver (G1)'
   card-mod-view-yaml: |
     .: |
@@ -417,6 +471,13 @@ Transformers Silver (Movie):
   ha-card-border-color: '#606060'
   transformers-card-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--accent-color), 0 4px 12px rgba(0, 0, 0, 0.38), 0 0 18px rgba(192, 192, 192, 0.15)'
   card-mod-theme: 'Transformers Silver (Movie)'
   card-mod-view-yaml: |
     .: |
@@ -479,6 +540,14 @@ Transformers Dirty Metal (G1):
   ha-card-border-color: '#4a4238'
   transformers-card-font-family: "'Transformers G1', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers G1', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--accent-color), 0 4px 12px rgba(0, 0, 0, 0.42), 0 0 18px rgba(212, 165, 116, 0.12)'
+  lovelace-background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px), repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px), #1c1814'
   card-mod-theme: 'Transformers Dirty Metal (G1)'
   card-mod-view-yaml: |
     .: |
@@ -544,6 +613,14 @@ Transformers Dirty Metal (Movie):
   ha-card-border-color: '#4a4238'
   transformers-card-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
   transformers-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  # --- Native HA >=2026.8 design tokens: these apply WITHOUT card-mod ---
+  ha-font-family-body: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-heading: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-font-family-longform: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-header-font-family: "'Transformers Movie', 'Arial Black', sans-serif"
+  ha-card-border-width: 2px
+  ha-card-box-shadow: 'inset 4px 0 0 0 var(--accent-color), 0 4px 12px rgba(0, 0, 0, 0.42), 0 0 18px rgba(212, 165, 116, 0.12)'
+  lovelace-background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px), repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px), #1c1814'
   card-mod-theme: 'Transformers Dirty Metal (Movie)'
   card-mod-view-yaml: |
     .: |
