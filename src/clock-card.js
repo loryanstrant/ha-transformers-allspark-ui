@@ -45,23 +45,66 @@ class TransformersClockCard extends TransformersBaseCard {
     super();
     this._time = new Date();
     this._interval = undefined;
+    this._minuteTimeout = undefined;
   }
 
   connectedCallback() {
     super.connectedCallback();
     this._time = new Date();
-    this._interval = setInterval(() => {
-      this._time = new Date();
-      this.requestUpdate();
-    }, 1000);
+    this._scheduleTick();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this._clearTick();
+  }
+
+  // `setConfig()` replaces `this.config` wholesale, which is a LitElement
+  // reactive property — reschedule whenever it lands, in case show_seconds
+  // changed (e.g. the visual editor's live preview).
+  updated(changedProps) {
+    super.updated(changedProps);
+    if (changedProps.has('config')) {
+      this._scheduleTick();
+    }
+  }
+
+  _clearTick() {
     if (this._interval) {
       clearInterval(this._interval);
       this._interval = undefined;
     }
+    if (this._minuteTimeout) {
+      clearTimeout(this._minuteTimeout);
+      this._minuteTimeout = undefined;
+    }
+  }
+
+  // `show_seconds` decides how often this card needs to wake up at all. With
+  // seconds on, a 1 Hz heartbeat is the point of the card. With them off —
+  // the common "just show HH:MM" case, and how this card is configured on
+  // the SHOCKWAVE wall panel — a second-by-second wake-up was pure waste:
+  // Lit was patching the same unchanged minute back in, 60 times for every
+  // one that actually mattered, forever. Wake once a minute instead, aligned
+  // to the boundary so the displayed minute still turns over on time rather
+  // than up to 59s late.
+  _scheduleTick() {
+    this._clearTick();
+    const showSeconds = this.config?.show_seconds !== false;
+    const tick = () => {
+      this._time = new Date();
+      this.requestUpdate();
+    };
+    if (showSeconds) {
+      this._interval = setInterval(tick, 1000);
+      return;
+    }
+    const now = new Date();
+    const msToNextMinute = 60000 - (now.getSeconds() * 1000 + now.getMilliseconds());
+    this._minuteTimeout = setTimeout(() => {
+      tick();
+      this._interval = setInterval(tick, 60000);
+    }, msToNextMinute);
   }
 
   render() {
